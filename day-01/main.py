@@ -1,15 +1,3 @@
-#https://stackoverflow.com/a/4665027
-def find_all(a_str, sub, overlap = False):
-    start = 0
-    while True:
-        start = a_str.find(sub, start)
-        if start == -1: return
-        yield start
-        if overlap:
-            start += 1
-        else:
-            start += len(sub)
-
 def main_p1(input: str) -> int:
     digits = ["".join([char for char in line if char.isnumeric()]) for line in input]
     digits = [int("".join([digit[0], digit[-1]])) for digit in digits]
