@@ -18,26 +18,23 @@ def main_p1(input: str) -> int:
 
 def main_p2(input: str):
     digit_map = {
-        "one": "1",
-        "two": "2",
-        "three": "3",
-        "four": "4",
-        "five": "5",
-        "six": "6",
-        "seven": "7",
-        "eight": "8",
-        "nine": "9"
+        "one": "o1ne",
+        "two": "tw2o",
+        "three": "thr3ee",
+        "four": "fo4ur",
+        "five": "fi5ve",
+        "six": "s6ix",
+        "seven": "sev7en",
+        "eight": "eig8ht",
+        "nine": "ni9ne"
     }
     new_input = []
 
     for line in input:
-        temp = "".join([char for char in line if char.isnumeric()])
-        for i, d in enumerate(digit_map.items()):
-            digit_name, digit = d
-            for index in list(find_all(line, digit_name, overlap=True)):
-                temp = temp[:index] + digit + temp[index + 1:]
-                index += i
-        print(temp)
+        temp = line
+        for d_name, d_replacement in digit_map.items():
+            temp = temp.replace(d_name, d_replacement)
+            
         new_input.append(temp)
 
     return main_p1(new_input)
