@@ -1,3 +1,15 @@
+#https://stackoverflow.com/a/4665027
+def find_all(a_str, sub, overlap = False):
+    start = 0
+    while True:
+        start = a_str.find(sub, start)
+        if start == -1: return
+        yield start
+        if overlap:
+            start += 1
+        else:
+            start += len(sub)
+
 def main_p1(input: str) -> int:
     digits = ["".join([char for char in line if char.isnumeric()]) for line in input]
     digits = [int("".join([digit[0], digit[-1]])) for digit in digits]
@@ -19,11 +31,13 @@ def main_p2(input: str):
     new_input = []
 
     for line in input:
-        temp = ""
-        for i in range(1, len(line) + 1):
-            temp += line[i - 1:i]
-            for digit_name, digit in digit_map.items():
-                temp = temp.replace(digit_name, digit)
+        temp = "".join([char for char in line if char.isnumeric()])
+        for i, d in enumerate(digit_map.items()):
+            digit_name, digit = d
+            for index in list(find_all(line, digit_name, overlap=True)):
+                temp = temp[:index] + digit + temp[index + 1:]
+                index += i
+        print(temp)
         new_input.append(temp)
 
     return main_p1(new_input)
