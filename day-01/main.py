@@ -20,7 +20,7 @@ def main_p2(input: str):
 
     for line in input:
         temp = ""
-        for i, _ in enumerate(line, start=1):
+        for i in range(1, len(line) + 1):
             temp += line[i - 1:i]
             for digit_name, digit in digit_map.items():
                 temp = temp.replace(digit_name, digit)
