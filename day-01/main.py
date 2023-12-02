@@ -1,6 +1,6 @@
 import sys
 sys.path.append("..")
-from aoc_common import get_input, get_test_input
+from aoc_common import get_input, get_test_input, test
 
 def main_p1(input: str) -> int:
     digits = ["".join([char for char in line if char.isnumeric()]) for line in input]
@@ -32,15 +32,8 @@ def main_p2(input: str):
     return main_p1(new_input)
 
 if __name__ == "__main__":
-    test_input, test_answer = get_test_input("./test-input-p1.txt")
-    assert main_p1(test_input) == int(test_answer)
-    print("Test 1 passed")
-
-    test_input, test_answer = get_test_input("./test-input-p2.txt")
-    assert main_p2(test_input) == int(test_answer)
-    main_p2(test_input)
-    print("Test 2 passed")
-
+    test(1, "./test-input-p1.txt", main_p1)
+    test(2, "./test-input-p2.txt", main_p2)
 
     input = get_input("./input.txt")
     answer1 = main_p1(input)
