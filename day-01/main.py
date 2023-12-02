@@ -1,3 +1,7 @@
+import sys
+sys.path.append("..")
+from aoc_common import get_input, get_test_input
+
 def main_p1(input: str) -> int:
     digits = ["".join([char for char in line if char.isnumeric()]) for line in input]
     digits = [int("".join([digit[0], digit[-1]])) for digit in digits]
@@ -27,26 +31,13 @@ def main_p2(input: str):
 
     return main_p1(new_input)
 
-def get_input(path: str) -> list:
-    with open(path, "r") as f:
-        input = f.read().split("\n")
-    return input
-
-def get_test_input(path: str) -> tuple:
-    input = get_input(path)
-
-    test_answer = int(input[-1:][0])
-    test_input = input[:-2]
-
-    return test_input, test_answer 
-
 if __name__ == "__main__":
     test_input, test_answer = get_test_input("./test-input-p1.txt")
-    assert main_p1(test_input) == test_answer
+    assert main_p1(test_input) == int(test_answer)
     print("Test 1 passed")
 
     test_input, test_answer = get_test_input("./test-input-p2.txt")
-    assert main_p2(test_input) == test_answer
+    assert main_p2(test_input) == int(test_answer)
     main_p2(test_input)
     print("Test 2 passed")
 
