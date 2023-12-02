@@ -1,6 +1,6 @@
 import sys
 sys.path.append("..")
-from aoc_common import get_input, get_test_input
+from aoc_common import get_input, get_test_input, test
 import math
 from collections import defaultdict
 
@@ -50,13 +50,9 @@ def main_p2(input: str):
 if __name__ == "__main__":
     limits = {"red": 12, "green": 13, "blue": 14}
 
-    test_input, test_answer = get_test_input("./test-input-p1.txt")
-    assert main_p1(test_input, limits) == int(test_answer)
-    print("Test 1 passed")
+    test(1, "./test-input-p1.txt", main_p1, limits)
+    test(2, "./test-input-p2.txt", main_p2)
 
-    test_input, test_answer = get_test_input("./test-input-p2.txt")
-    assert main_p2(test_input) == int(test_answer)
-    print("Test 2 passed")
 
     input = get_input("input.txt")
     answer1 = main_p1(input, limits)
