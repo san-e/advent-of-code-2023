@@ -15,7 +15,7 @@ def parse(input: str):
         
     return out
 
-def main_p1(input: str, colors: dict):
+def process_p1(input: str, colors: dict):
     games = parse(input)
     possible_ids = set()
 
@@ -31,7 +31,7 @@ def main_p1(input: str, colors: dict):
 
     return sum(possible_ids)
 
-def main_p2(input: str):
+def process_p2(input: str):
     games = parse(input)
     products = []
     for id, game in games.items():
@@ -44,18 +44,19 @@ def main_p2(input: str):
 
     return sum(products)
 
-
-
-
-if __name__ == "__main__":
+def main():
     limits = {"red": 12, "green": 13, "blue": 14}
 
-    test(1, "./test-input-p1.txt", main_p1, limits)
-    test(2, "./test-input-p2.txt", main_p2)
+    test(1, "./test-input-p1.txt", process_p1, limits)
+    test(2, "./test-input-p2.txt", process_p2)
 
 
     input = get_input("input.txt")
-    answer1 = main_p1(input, limits)
-    answer2 = main_p2(input)
+    answer1 = process_p1(input, limits)
+    answer2 = process_p2(input)
 
     print(f"Part 1: {answer1}\nPart 2: {answer2}")
+
+
+if __name__ == "__main__":
+    main()
