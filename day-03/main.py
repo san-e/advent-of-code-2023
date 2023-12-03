@@ -7,15 +7,15 @@ def get_neighbours(input: list, x: int, y: int, fallback: str = '.') -> str:
     up = input[y-1][x] if y > 0 else fallback
     down = input[y+1][x] if y < len(input) - 1 else fallback
     left = input[y][x-1] if x > 0 else fallback
-    right = input[y][x+1] if x < len(input[x]) - 1 else fallback
+    right = input[y][x+1] if x < len(input[y]) - 1 else fallback
     upleft = input[y-1][x-1] if x > 0 and y > 0 else fallback
-    upright = input[y-1][x+1] if x < len(input[x]) - 1 and y > 0 else fallback
+    upright = input[y-1][x+1] if x < len(input[y]) - 1 and y > 0 else fallback
     downleft = input[y+1][x-1] if x > 0 and y < len(input) - 1 else fallback
-    downright = input[y+1][x+1] if x < len(input[x]) - 1 and y < len(input) - 1 else fallback
+    downright = input[y+1][x+1] if x < len(input[y]) - 1 and y < len(input) - 1 else fallback
 
-    print(f"{upleft} {up} {upright}")
-    print(f"{left} {input[y][x]} {right}")
-    print(f"{downleft} {down} {downright}")
+    # print(f"{upleft} {up} {upright}")
+    # print(f"{left} {input[y][x]} {right}")
+    # print(f"{downleft} {down} {downright}")
 
     return (upleft, (y-1,x-1)), (up, (y-1,x)), (upright,(y-1,x+1)), (right, (y,x+1)), \
         (downright, (y+1, x+1)), (down,(y+1, x)), (downleft, (y+1, x-1)), (left, (y, x-1))
@@ -52,13 +52,14 @@ def process_p2(input: str, gear: str = '*'):
         for x, char in enumerate(line):
             if char != gear:
                 continue
-            numbers = ["0", "0"]
+            numbers = ["1", "1"]
+            setnum = {0 : False, 1: False}
             neighbours = get_neighbours(input, x, y)
-            print("")
             iteration = 0
             lock = False
             lasty = -1
-            for nchar, location in neighbours:
+            for i, _ in enumerate(neighbours):
+                nchar, location = _
                 if not nchar.isdigit():
                     lock = False
                     continue
@@ -87,6 +88,7 @@ def process_p2(input: str, gear: str = '*'):
                             numbers[iteration - 1] += input[location[0]][location[1] + n]
 
                     if leftreached and rightreached:
+                        setnum[iteration -1] = True
                         break
                     n += 1
 
@@ -96,8 +98,6 @@ def process_p2(input: str, gear: str = '*'):
 
     return product_sum
 
-                    
-
 
 def main():
     symbols = {
@@ -105,8 +105,8 @@ def main():
         '@', '=', '%', '$','/'
     }
 
-    #test(1, "./test-input-p1.txt", process_p1, symbols)
-    #test(2, "./test-input-p2.txt", process_p2)
+    test(1, "./test-input-p1.txt", process_p1, symbols)
+    test(2, "./test-input-p2.txt", process_p2)
 
     print(process_p2(get_input("./input.txt")))
 
