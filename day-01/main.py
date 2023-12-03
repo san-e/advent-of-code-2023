@@ -2,13 +2,13 @@ import sys
 sys.path.append("..")
 from aoc_common import get_input, get_test_input, test
 
-def main_p1(input: str) -> int:
+def process_p1(input: str) -> int:
     digits = ["".join([char for char in line if char.isnumeric()]) for line in input]
     digits = [int("".join([digit[0], digit[-1]])) for digit in digits]
 
     return sum(digits)
 
-def main_p2(input: str):
+def process_p2(input: str):
     digit_map = {
         "one": "o1ne",
         "two": "tw2o",
@@ -29,14 +29,17 @@ def main_p2(input: str):
             
         new_input.append(temp)
 
-    return main_p1(new_input)
+    return process_p1(new_input)
 
-if __name__ == "__main__":
-    test(1, "./test-input-p1.txt", main_p1)
-    test(2, "./test-input-p2.txt", main_p2)
+def main():
+    test(1, "./test-input-p1.txt", process_p1)
+    test(2, "./test-input-p2.txt", process_p2)
 
     input = get_input("./input.txt")
-    answer1 = main_p1(input)
-    answer2 = main_p2(input)
+    answer1 = process_p1(input)
+    answer2 = process_p2(input)
 
     print(f"Answer 1: {answer1}\nAnswer 2: {answer2}")
+
+if __name__ == "__main__":
+    main()
